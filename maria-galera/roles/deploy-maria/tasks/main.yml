@@ -24,7 +24,7 @@
     name:
     - mariadb-server.x86_64
     #- mariadb
-    state: latest
+    state: present
 
 # - name: enable and start mariadb
 #   systemd: 
