@@ -1,0 +1,6 @@
+---
+- name: firewalld_reload
+  command: firewall-cmd --reload
+
+- name: Add_mysql_t_selinux
+  command: semanage permissive -a mysqld_t

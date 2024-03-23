@@ -1,0 +1,54 @@
+---
+- name: install galera pkgs
+  dnf:
+    name: 
+    - galera
+    - rsync
+    - policycoreutils-python-utils.noarch
+    - mariadb-server-galera
+    state: latest
+
+- name: Allow galera Ports
+  firewalld:
+    port: "{{ item }}"
+    zone: public
+    state: enabled
+    permanent: true
+  loop:
+    - 4444/tcp
+    - 4567/tcp
+    - 4568/tcp
+    - 4568/udp
+    - 4567/udp
+  notify:
+  - firewalld_reload
+
+- meta: flush_handlers
+
+- name: Allow source
+  firewalld:
+    zone: public
+    source: "{{item}}"
+    state: enabled
+    permanent: true
+  loop:
+  - "{{ip_1}}/32"
+  - "{{ip_2}}/32"
+
+- meta: flush_handlers
+
+
+- name: push file to servers
+  template:
+    src: galera.cnf.j2
+    dest: /etc/my.cnf.d/galera.cnf
+
+- name: new cluster
+  command: galera_new_cluster
+  when: ansible_host == ip_1
+
+- name: start maria
+  systemd:
+    name: mariadb
+    state: started
+  when: ansible_host == ip_2
