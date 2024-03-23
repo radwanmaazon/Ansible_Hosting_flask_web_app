@@ -1,0 +1,58 @@
+---
+- name: update 
+  command: dnf update -y
+
+- name: add hostname 
+  lineinfile:
+    path: /etc/hosts
+    line: "{{item}}"
+    # state: absent
+  loop:
+  - "{{ip_1}} db1.mydomain.org"
+  - "{{ip_2}} db2.mydomain.org"
+
+# - name: push mariadb Repo
+#   copy:
+#     src: mariadb.repo
+#     dest: /etc/yum.repos.d/
+#   notify:
+#   - dnf_clean
+# - meta: flush_handlers
+
+- name: install mariadb
+  dnf:
+    name:
+    - mariadb-server.x86_64
+    #- mariadb
+    state: latest
+
+# - name: enable and start mariadb
+#   systemd: 
+#     name: mariadb
+#     enabled: yes
+#     state: started
+
+- name: Allow ports
+  firewalld:
+    port: 3306/tcp
+    zone: public
+    state: enabled
+    permanent: true
+  notify:
+  - firewalld_reload
+
+- meta: flush_handlers
+
+- name: stop_maria
+  systemd: 
+    name: mariadb
+    state: stopped
+
+
+- name: hostname one
+  command: hostnamectl set-hostname db1.mydomain.org
+  when: ansible_host == ip_1
+
+- name: hostname two
+  command: hostnamectl set-hostname db2.mydomain.org
+  when: ansible_host == ip_2
