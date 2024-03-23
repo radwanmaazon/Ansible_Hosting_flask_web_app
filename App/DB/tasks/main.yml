@@ -1,0 +1,29 @@
+---
+- name: create gs DB
+  mysql_db:
+    name: gs
+    state: present
+    login_unix_socket: /var/lib/mysql/mysql.sock
+  
+- name: copy dumped DB to server
+  copy:
+    src: gs.sql
+    dest: /root/
+
+- name: Restore DB
+  mysql_db: 
+    name: gs
+    state: import
+    target: /root/gs.sql
+    login_unix_socket: /var/lib/mysql/mysql.sock
+
+- name: create appuser for DB
+  mysql_user:
+    name: radwan
+    password: pass
+    priv: 'gs.*:ALL'
+    host: '%'
+    state: present
+    login_unix_socket: /var/lib/mysql/mysql.sock
+  no_log: true
+  
