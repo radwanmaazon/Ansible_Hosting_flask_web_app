@@ -6,7 +6,7 @@
     - rsync
     - policycoreutils-python-utils.noarch
     - mariadb-server-galera
-    state: latest
+    state: present
 
 - name: Allow galera Ports
   firewalld:
