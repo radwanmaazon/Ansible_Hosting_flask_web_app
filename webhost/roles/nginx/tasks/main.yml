@@ -1,0 +1,30 @@
+---
+- name: update 
+  apt:
+    update_cache: yes
+
+- name: install nginx
+  apt:
+    name: nginx
+    state: latest
+
+- name: enable nginx 
+  systemd:
+    name: nginx
+    state: started
+    enabled: true
+
+- name: allow ufw
+  ufw:
+    rule: 'allow'
+    proto: 'tcp'
+    port: '{{ item }}'
+  loop:
+    - '22'
+    - '80'
+  notify:
+  - reload_firewall
+
+- meta: flush_handlers
+
+  

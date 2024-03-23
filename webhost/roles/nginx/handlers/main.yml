@@ -1,0 +1,6 @@
+---
+- name: enable_firewall
+  command: ufw --force enable
+
+- name: reload_firewall
+  command: ufw --force reload 
