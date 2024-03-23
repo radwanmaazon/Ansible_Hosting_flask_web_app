@@ -1,0 +1,6 @@
+---
+- hosts: DBCM
+  become: true
+  roles:
+  - deploy-maria
+  - deploy-galera
