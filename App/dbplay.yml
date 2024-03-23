@@ -1,0 +1,6 @@
+---
+- hosts: prim
+  become: true
+  roles:
+  - DB 
+  
