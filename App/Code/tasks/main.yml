@@ -1,0 +1,7 @@
+---
+- name: Copy project files
+  copy: 
+    src: simple-flaskApp 
+    dest: /var/www/html/
+
+    

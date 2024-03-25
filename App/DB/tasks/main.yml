@@ -19,8 +19,8 @@
 
 - name: create appuser for DB
   mysql_user:
-    name: radwan
-    password: pass
+    name: appuser
+    password: appuser
     priv: 'gs.*:ALL'
     host: '%'
     state: present

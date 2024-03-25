@@ -1,0 +1,19 @@
+---
+# - name: Copy service files
+#   copy:
+#     src: app.service
+#     dest: /etc/systemd/system/
+#   notify:
+#     - enable_and_start_service
+
+# - meta: flush_handlers
+
+- name: Copy nginx file  
+  copy:
+    src: app.conf
+    dest: /etc/nginx/sites-available/default
+  notify:
+  - sites-enabled
+  - restart_nginx
+
+- meta: flush_handlers 
