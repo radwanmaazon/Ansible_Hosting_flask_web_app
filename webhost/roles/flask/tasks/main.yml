@@ -7,9 +7,10 @@
     state: latest
     update_cache: true
 
-- name: install flask
+- name: Install Flask and MySQL dependencies
   pip:
     name:
-    - flask
-    - flask-mysql
-    - uwsgi
+      - flask
+      - mysql-connector-python
+      - flask-mysql
+
