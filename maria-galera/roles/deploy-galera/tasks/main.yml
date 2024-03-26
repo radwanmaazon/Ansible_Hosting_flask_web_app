@@ -2,10 +2,10 @@
 - name: install galera pkgs
   dnf:
     name: 
+    - mariadb-server-galera
     - galera
     - rsync
     - policycoreutils-python-utils.noarch
-    - mariadb-server-galera
     state: present
 
 - name: Allow galera Ports
