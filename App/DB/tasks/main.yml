@@ -1,4 +1,11 @@
 ---
+- name: install mysql python
+  dnf: 
+    name: 
+    - python3-PyMySQL
+    state: latest
+    update_cache: true
+    
 - name: create gs DB
   mysql_db:
     name: gs
