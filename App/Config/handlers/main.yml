@@ -1,4 +1,10 @@
 ---
+- name: add_db_to_hosts
+  lineinfile:
+    path: /etc/hosts
+    line: '192.168.1.67 db1.mydomain.org'
+    state: present
+
 - name: enable_and_start_service
   command: systemctl enable --now app.service
 

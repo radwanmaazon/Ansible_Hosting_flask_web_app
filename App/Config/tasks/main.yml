@@ -4,6 +4,7 @@
     src: app.service
     dest: /etc/systemd/system/
   notify:
+    - add_db_to_hosts
     - enable_and_start_service
 
 - meta: flush_handlers
