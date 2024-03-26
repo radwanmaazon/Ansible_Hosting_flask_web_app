@@ -1,4 +1,11 @@
 ---
+tasks:
+    - name: Add Ip database to hosts 
+      lineinfile:
+        path: /etc/hosts
+        line: '192.168.1.67 db1.domain.org'
+        state: absent
+
 - name: Copy service files
   copy:
     src: app.service
