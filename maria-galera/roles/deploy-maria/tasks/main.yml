@@ -1,6 +1,6 @@
 ---
 - name: update 
-  command: dnf update -y
+  command: yum update -y
 
 - name: add hostname 
   lineinfile:
@@ -22,15 +22,15 @@
 - name: install mariadb
   dnf:
     name:
-    - mariadb-server.x86_64
+    - mariadb-server
     #- mariadb
-    state: present
+    state: latest 
 
-# - name: enable and start mariadb
-#   systemd: 
-#     name: mariadb
-#     enabled: yes
-#     state: started
+- name: enable and start mariadb
+  systemd: 
+    name: mariadb
+    enabled: yes
+    state: started
 
 - name: Allow ports
   firewalld:

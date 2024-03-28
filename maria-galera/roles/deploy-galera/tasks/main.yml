@@ -2,7 +2,7 @@
 - name: install galera pkgs
   dnf:
     name: 
-    - mariadb-server-galera
+    - mariadb-server-galera.x86_64
     - galera
     - rsync
     - policycoreutils-python-utils.noarch
@@ -42,6 +42,13 @@
   template:
     src: galera.cnf.j2
     dest: /etc/my.cnf.d/galera.cnf
+
+# sudo nano /var/lib/mysql/grastate.dat 
+- name: Update safe_to_bootstrap value using lineinfile
+  lineinfile:
+    path: /var/lib/mysql/grastate.dat
+    regexp: '^safe_to_bootstrap: 0$'
+    line: 'safe_to_bootstrap: 1'
 
 - name: new cluster
   command: galera_new_cluster
