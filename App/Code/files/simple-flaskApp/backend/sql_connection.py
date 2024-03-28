@@ -7,7 +7,7 @@ def get_sql_connection():
     if __mydb is None:
 
         __mydb = mysql.connector.connect(
-            host="192.168.1.185",
+            host="db1.mydomain.org",
             user="appuser",
             password="appuser",
             database="gs"

@@ -1,10 +1,9 @@
 ---
-tasks:
-    - name: Add Ip database to hosts 
-      lineinfile:
-        path: /etc/hosts
-        line: '192.168.1.67 db1.domain.org'
-        state: absent
+- name: Remove line with db1.mydomain.org from /etc/hosts
+  replace:
+    path: /etc/hosts
+    regexp: '^{{ ip_1 }}.*db1\.mydomain\.org.*$'
+    replace: "{{ ip_1 }} db1.mydomain.org"
 
 - name: Copy service files
   copy:
@@ -12,7 +11,10 @@ tasks:
     dest: /etc/systemd/system/
   notify:
     - add_db_to_hosts
-    - enable_and_start_service
+
+- name: enable_and_start_service
+  command: systemctl enable --now app.service
+
 
 - meta: flush_handlers
 
