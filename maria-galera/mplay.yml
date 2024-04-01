@@ -1,8 +1,8 @@
 ---
 - hosts: DBCM
-  # become: true
-  # become_user: root
-  # become_method: su
+  become: true
+  become_user: root
+  become_method: su
   roles:
   - deploy-maria
   - deploy-galera
