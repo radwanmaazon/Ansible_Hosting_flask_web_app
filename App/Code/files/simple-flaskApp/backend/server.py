@@ -11,21 +11,22 @@ app = Flask(__name__)
 
 connection = get_sql_connection()
 
-@app.route('/getUOM', methods=['GET'])
+@app.route('/api/getUOM', methods=['GET'])
 def get_uom():
     response = uom_dao.get_uoms(connection)
     response = jsonify(response)
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
-@app.route('/getProducts', methods=['GET'])
+@app.route('/api/getProducts', methods=['GET'])
 def get_products():
     response = products_dao.get_all_products(connection)
     response = jsonify(response)
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
-@app.route('/insertProduct', methods=['POST'])
+
+@app.route('/api/insertProduct', methods=['POST'])
 def insert_product():
     request_payload = json.loads(request.form['data'])
     product_id = products_dao.insert_new_product(connection, request_payload)
@@ -35,14 +36,14 @@ def insert_product():
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
-@app.route('/getAllOrders', methods=['GET'])
+@app.route('/api/getAllOrders', methods=['GET'])
 def get_all_orders():
     response = orders_dao.get_all_orders(connection)
     response = jsonify(response)
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
-@app.route('/insertOrder', methods=['POST'])
+@app.route('/api/insertOrder', methods=['POST'])
 def insert_order():
     request_payload = json.loads(request.form['data'])
     order_id = orders_dao.insert_order(connection, request_payload)
@@ -52,7 +53,7 @@ def insert_order():
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
-@app.route('/deleteProduct', methods=['POST'])
+@app.route('/api/deleteProduct', methods=['POST'])
 def delete_product():
     return_id = products_dao.delete_product(connection, request.form['product_id'])
     response = jsonify({
@@ -63,5 +64,4 @@ def delete_product():
 
 if __name__ == "__main__":
     print("Starting Python Flask Server For Grocery Store Management System")
-    app.run(port=5000)
-
+    app.run(port=5000,host='0.0.0.0')
