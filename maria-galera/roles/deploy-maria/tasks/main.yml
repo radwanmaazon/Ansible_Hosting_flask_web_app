@@ -10,6 +10,7 @@
   loop:
   - "{{ip_1}} db1.mydomain.org"
   - "{{ip_2}} db2.mydomain.org"
+  - "{{ip_3}} db3.mydomain.org"
 
 # - name: push mariadb Repo
 #   copy:
@@ -26,11 +27,11 @@
     #- mariadb
     state: latest 
 
-- name: enable and start mariadb
-  systemd: 
-    name: mariadb
-    enabled: yes
-    state: started
+# - name: enable and start mariadb
+#   systemd: 
+#     name: mariadb
+#     enabled: yes
+#     state: started
 
 - name: Allow ports
   firewalld:
@@ -56,3 +57,7 @@
 - name: hostname two
   command: hostnamectl set-hostname db2.mydomain.org
   when: ansible_host == ip_2
+
+- name: hostname two
+  command: hostnamectl set-hostname db3.mydomain.org
+  when: ansible_host == ip_3

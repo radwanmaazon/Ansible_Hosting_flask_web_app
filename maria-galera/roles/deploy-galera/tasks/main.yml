@@ -34,6 +34,7 @@
   loop:
   - "{{ip_1}}/32"
   - "{{ip_2}}/32"
+  - "{{ip_3}}/32"
 
 - meta: flush_handlers
 
@@ -58,4 +59,6 @@
   systemd:
     name: mariadb
     state: started
-  when: ansible_host == ip_2
+  when: 
+  - ansible_host == ip_2
+  - ansible_host == ip_3
