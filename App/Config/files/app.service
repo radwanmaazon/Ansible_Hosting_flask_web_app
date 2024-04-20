@@ -6,7 +6,7 @@ After=network.target
 User=radwan
 Group=www-data
 
-WorkingDirectory=/var/www/html/simple-flaskApp/backend/
+WorkingDirectory=/home/radwan/pro/simple-flaskApp/backend/
 Environment="PATH=/usr/local/bin/"
 ExecStart=/usr/bin/python3 server.py
 

@@ -8,8 +8,8 @@
   copy:
     src: app.service
     dest: /etc/systemd/system/
-  notify:
-    - add_db_to_hosts
+  # notify:
+  #   - add_db_to_hosts
 
 - name: enable_service
   command: systemctl enable app.service
