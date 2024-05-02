@@ -1,3 +1,4 @@
+import configparser
 import mysql.connector
 
 __mydb = None
