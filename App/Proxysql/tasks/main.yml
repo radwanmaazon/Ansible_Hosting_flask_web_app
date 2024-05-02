@@ -1,0 +1,40 @@
+---
+- name: update system
+  command: apt update -y
+
+- name: Set Hostname 
+  hostname:
+    name: proxysql.radwan.local
+
+- name: install mysql python
+  apt: 
+    name: 
+    - python3-mysqldb
+    - mysql-client
+    state: latest
+    update_cache: true
+
+- name: copy proxysql installation file to server
+  copy:
+    src: proxysql_2.0.4-ubuntu16_amd64.deb
+    dest: /home/radwan/
+    mode: "0775"
+  notify:
+  - Install_proxysql
+  - enable_and_start_proxysql
+  - update_admin_password
+  - update_mysql-monitor_username
+  - Add_nodes_to_proxySql
+  - Creating_the_ProxySQL_User
+
+- meta: flush_handlers
+
+- name: load to runtime and save 
+  mysql_query:
+    login_user: admin
+    login_password: '{{ admin_pass }}'
+    login_host: 127.0.0.1
+    login_port: 6032
+    query: 
+      - "LOAD ADMIN VARIABLES TO RUNTIME;"
+      - "SAVE ADMIN VARIABLES TO DISK;"

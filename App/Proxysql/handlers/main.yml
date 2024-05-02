@@ -1,0 +1,49 @@
+---
+- name: Install_proxysql 
+  command: dpkg -i /home/radwan/proxysql_2.0.4-ubuntu16_amd64.deb 
+
+- name: enable_and_start_proxysql
+  systemd:
+    name: proxysql
+    enabled: yes
+    state: started
+
+- name: update_admin_password
+  mysql_query:
+    login_user: admin
+    login_password: '{{ admin_pass }}'
+    login_host: 127.0.0.1
+    login_port: 6032
+    query: 
+      - "UPDATE global_variables SET variable_value='admin:{{ admin_pass }}' WHERE variable_name='admin-admin_credentials';"
+
+- name: update_mysql-monitor_username
+  mysql_query:
+    login_user: admin
+    login_password: '{{ admin_pass }}'
+    login_host: 127.0.0.1
+    login_port: 6032
+    query: 
+      - "UPDATE global_variables SET variable_value='monitor' WHERE variable_name='mysql-monitor_username';"
+
+- name: Add_nodes_to_proxySql
+  mysql_query:
+    login_user: admin
+    login_password: '{{ admin_pass }}'
+    login_host: 127.0.0.1
+    login_port: 6032
+    query: 
+      - "REPLACE INTO mysql_group_replication_hostgroups (writer_hostgroup, backup_writer_hostgroup, reader_hostgroup, offline_hostgroup, active, max_writers, writer_is_also_reader, max_transactions_behind) VALUES (2, 4, 3, 1, 1, 3, 1, 100);"
+      - "REPLACE INTO mysql_servers(hostgroup_id, hostname, port) VALUES (2, '{{ item }}', 3306);" 
+  loop:
+    - '{{ ip_1 }}'
+    - '{{ ip_2 }}'
+    - '{{ ip_3 }}'
+
+- name: Creating_the_ProxySQL_User
+  mysql_query:
+    login_user: admin
+    login_password: '{{ admin_pass }}'
+    login_host: 127.0.0.1
+    login_port: 6032
+    query: "REPLACE INTO mysql_users(username, password, default_hostgroup) VALUES ('playgrounduser', '{{ playgrounduser_pass }}', 2);"
