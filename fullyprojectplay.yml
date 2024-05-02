@@ -1,5 +1,6 @@
 ---
-# - import_playbook: maria-galera/mplay.yml
-# - import_playbook: webhost/mplay.yml
-# - import_playbook: App/dbplay.yml
+- import_playbook: maria-galera/mplay.yml
+- import_playbook: webhost/mplay.yml
 - import_playbook: App/hostplay.yml
+- import_playbook: App/proxyplay.yml
+- import_playbook: App/dbplay.yml
