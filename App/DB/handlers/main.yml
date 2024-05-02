@@ -1,0 +1,7 @@
+---
+- name: Restore DB
+  mysql_db: 
+    name: gs
+    state: import
+    target: /root/gs.sql
+    login_unix_socket: /var/lib/mysql/mysql.sock

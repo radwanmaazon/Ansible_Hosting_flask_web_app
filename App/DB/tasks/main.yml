@@ -16,13 +16,10 @@
   copy:
     src: gs.sql
     dest: /root/
+  notify:
+  - Restore_DB
 
-- name: Restore DB
-  mysql_db: 
-    name: gs
-    state: import
-    target: /root/gs.sql
-    login_unix_socket: /var/lib/mysql/mysql.sock
+- meta: flush_handlers
 
 - name: create appuser for DB
   mysql_user:
@@ -32,5 +29,4 @@
     host: '%'
     state: present
     login_unix_socket: /var/lib/mysql/mysql.sock
-  no_log: true
-  
+  no_log: true  

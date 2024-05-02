@@ -10,7 +10,7 @@ def get_sql_connection():
             host="192.168.1.74",
             port="6033",
             user="playgrounduser",
-            password="P@ssw0rdplay",
+            password="{{ playgrounduser_pass }}",
             database="gs"
         )
         
