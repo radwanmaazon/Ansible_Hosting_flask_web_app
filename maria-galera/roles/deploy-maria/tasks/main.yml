@@ -51,13 +51,16 @@
 
 
 - name: hostname one
-  command: hostnamectl set-hostname db1.mydomain.org
+  hostname:
+    name: db1.mydomain.org
   when: ansible_host == ip_1
 
 - name: hostname two
-  command: hostnamectl set-hostname db2.mydomain.org
+  hostname:
+    name: db2.mydomain.org
   when: ansible_host == ip_2
 
-- name: hostname two
-  command: hostnamectl set-hostname db3.mydomain.org
+- name: hostname three
+  hostname:
+    name: db3.mydomain.org
   when: ansible_host == ip_3
