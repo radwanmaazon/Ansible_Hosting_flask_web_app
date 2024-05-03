@@ -22,3 +22,8 @@ I used proxysql as a loadbalancer to achieve high availability to accessing data
 ## New item has been added from browser 
 ![New_item](./imgs/new_item.png)
 
+## Two database servers down and 2 items have been removed from database 
+![Db_servers_down](./imgs/db_servers_down.png)
+
+## Restart the db servers to be online and check if it read the change in the items
+![db_restarted](./imgs/db_restarted.png)
