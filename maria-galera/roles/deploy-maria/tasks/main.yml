@@ -27,11 +27,11 @@
     #- mariadb
     state: latest 
 
-# - name: enable and start mariadb
-#   systemd: 
-#     name: mariadb
-#     enabled: yes
-#     state: started
+- name: enable and start mariadb
+  systemd: 
+    name: mariadb
+    enabled: yes
+    state: started
 
 - name: Allow ports
   firewalld:
