@@ -7,5 +7,7 @@ I used proxysql as a loadbalancer to achieve high availability to accessing data
 ``` sh 
     $ ansible-playbook -i hosts.txt fullyprojectplay.yml --vault-password-file ~/.passwords/vault-pass 
 ```
+## Accessing flask application with GUI
+![Page 1](../imgs/page1.png)
 
 
