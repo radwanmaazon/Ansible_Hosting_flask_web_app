@@ -16,5 +16,9 @@ I used proxysql as a loadbalancer to achieve high availability to accessing data
 ## Load Balancer 
 ![Lb](./imgs/lb.png)
 
+## Connection to data base by load balancer (proxysql)
+![Db_connection](./imgs/db_connection.png)
+
 ## New item has been added from browser 
 ![New_item](./imgs/new_item.png)
+
