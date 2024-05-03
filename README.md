@@ -11,6 +11,6 @@ I used proxysql as a loadbalancer to achieve high availability to accessing data
 ![Page 1](./imgs/page1.png)
 
 ## DataBase on three db servers 
-![Db](./imgs/db.png)
+![Database](./imgs/db.png)
 
 
