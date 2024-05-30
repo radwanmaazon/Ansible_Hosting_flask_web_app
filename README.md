@@ -27,3 +27,8 @@ I used proxysql as a loadbalancer to achieve high availability to accessing data
 
 ## Restart the db servers to be online and check if it read the change in the items
 ![db_restarted](./imgs/db_restarted.png)
+
+## Ownership
+![Radwan Maazon](images/Radwan1.jpg)|
+|:-----------------:|
+|[Radwan Maazon](https://github.com/redwan2050)|
