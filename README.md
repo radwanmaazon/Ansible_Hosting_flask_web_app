@@ -29,6 +29,6 @@ I used proxysql as a loadbalancer to achieve high availability to accessing data
 ![db_restarted](./imgs/db_restarted.png)
 
 ## Ownership
-![Radwan Maazon](images/Radwan1.jpg)|
+![Radwan Maazon](imgs/Radwan1.jpg)|
 |:-----------------:|
 |[Radwan Maazon](https://github.com/redwan2050)|
